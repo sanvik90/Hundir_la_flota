@@ -1,17 +1,13 @@
 import numpy as np
 import variables as v 
 
-"""
-_____________Cosas de tableros
-"""
+
 
 def crear_tablero():
     tablero =np.full((10,10),"🌊")
     return tablero
 
-"""
-_________________creacion de barcos
-"""
+
 
 
 def crear_barco(eslora):
@@ -65,20 +61,12 @@ def colocar_flota(flota,tablero):
             tablero[fila, col] = "🚢" 
     return tablero
 
-def marcador():
-    for i, barco in enumerate(flota):(f"Barco {i + 1}: {len(barco)} esloras")
 
-
-def cordenadas(flota_rival):
-    for i, barco in enumerate(flota_rival):
-        print(f"Barco {i + 1}: {len(barco)} esloras")
-        print(f"Tipo: {type(barco)}")
-        print(f"Contenido: {barco}")
 
 
 def pintar(t_jug_bar, t_jug_dis):
 
-    print("🗺️ 🗺️ 🗺️ 🗺️ 🗺️ 🗺️ 🗺️ 🗺️ Tableros")
+    print("🗺️  Tableros 🗺️ ")
     print()
 
     print("⚓ ⚓ ⚓ ⚓ ⚓ ⚓ Esto son tus barcos ⚓ ⚓ ⚓ ⚓ ⚓ ⚓")
@@ -95,14 +83,14 @@ def pintar(t_jug_bar, t_jug_dis):
 def disparo(t_riv_bar,t_jug_dis):
 
     try:
-        fila = int(input("Fila"))
-        columna = int(input("Columna"))
+        fila = int(input("Escoje la fila: "))
+        columna = int(input("Escoje la columna: "))
         if t_riv_bar[fila][columna] =="🚢":
             t_jug_dis[fila][columna] ="💥"
             print(v.textos_acierto)
         else:
             t_jug_dis[fila][columna] ="💨"
-            print(v.textos_Fallo)
+            print("fallo")
         
     except:
        
@@ -143,20 +131,20 @@ def crear_lista_impactos(flota):
 def turnos(t_riv_bar, t_jug_dis, t_jug_bar, t_riv_dis):
 
     turno_jugador = True
+    t=1
 
     while True:
         if turno_jugador:
-            print("Turno Jugador")
+            print(f"Turno Jugador número: {t+13}")
             disparo(t_riv_bar, t_jug_dis)
+            pintar(t_jug_bar, t_jug_dis)
             turno_jugador = False
-            print(pintar(t_jug_bar, t_jug_dis))
 
         else:
             print("Turno Rival")
             disparo_maq1(t_jug_bar, t_riv_dis)
+            pintar(t_jug_bar, t_jug_dis)
             turno_jugador = True
-            print(pintar(t_jug_bar, t_jug_dis))
-
 
 
 

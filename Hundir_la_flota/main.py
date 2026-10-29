@@ -10,6 +10,7 @@ t_jug_dis = fc.crear_tablero()
 flota_jugador = fc.crear_flota()
 flota_rival = fc.crear_flota()
 
+
 t_jug_bar = fc.colocar_flota(flota_jugador, t_jug_bar)
 t_riv_bar = fc.colocar_flota(flota_rival, t_riv_bar)
 
