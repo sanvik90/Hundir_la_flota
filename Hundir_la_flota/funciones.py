@@ -86,12 +86,12 @@ def disparo(t_riv_bar, t_jug_dis, t_jug_bar):
         print("👁️ 👁️ 👁️ 👁️Superperiscopio activado 👁️ 👁️ 👁️ 👁️")
         print(t_riv_bar)
         return disparo(t_riv_bar, t_jug_dis, t_jug_bar)
-    elif fila >10 or fila < -1:
+    elif fila >9 or fila < -1:
         print("Pero con un valor del 0 al 9, leñe ")
         return disparo(t_riv_bar, t_jug_dis, t_jug_bar)
 
     columna = int(input("Escoge la columna "))
-    if columna >10 or columna < -1:
+    if columna >9 or columna < -1:
             print("Pero con un valor del 0 al 9, leñe ")
             return disparo(t_riv_bar, t_jug_dis, t_jug_bar)
     
@@ -193,5 +193,7 @@ def turnos(t_riv_bar, t_jug_dis, t_jug_bar, t_riv_dis):
         else:
             print("Turno Rival")
             time.sleep(2)
+            print("Pensando.....")
+            time.sleep(3)
             disparo_maq1(t_jug_bar, t_riv_dis, t_jug_dis)
             turno_jugador = True
