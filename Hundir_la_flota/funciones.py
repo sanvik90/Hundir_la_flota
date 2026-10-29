@@ -15,10 +15,17 @@ _________________creacion de barcos
 
 
 def crear_barco(eslora):
-    proa_fila = np.random.randint(0, 11 - eslora)
-    proa_col = np.random.randint(0, 11 - eslora)
-    voh = np.random.choice(("a","b")) # un random con dos salidas para elegir si el barco sera horizontal o vertical.
+    voh = np.random.choice(("a", "b"))
+
+    if voh == "a":  # Vertical
+        proa_fila = np.random.randint(10 - eslora + 1)
+        proa_col = np.random.randint(10)
+    else:  # Horizontal
+        proa_fila = np.random.randint(10)
+        proa_col = np.random.randint(10 - eslora + 1)
+
     barco = []
+
     for i in range(eslora):
         if voh == "a":
             barco.append((proa_fila + i, proa_col))
@@ -30,15 +37,13 @@ def crear_barco(eslora):
 
 def crear_flota():
     flota = []
-
-
     for eslora in v.esloras_f:
         flota.append(crear_barco(eslora))
     for barco in flota:
         for coor in barco:
             if 0 < coor[0]>9 or 0 < coor[1]> 9:
-                print("gnerando de nuevo")
-                crear_flota()
+                return crear_flota()
+
     coordenadas_vistas = set()
     repetidas = set()
 
@@ -49,10 +54,8 @@ def crear_flota():
             coordenadas_vistas.add(coor)
 
     if repetidas:
-        crear_flota()
+        return crear_flota()
         
-    
-    
     return flota
 
 def colocar_flota(flota,tablero):
@@ -62,21 +65,56 @@ def colocar_flota(flota,tablero):
             tablero[fila, col] = "🚢" 
     return tablero
 
-
 def marcador():
     for i, barco in enumerate(flota):(f"Barco {i + 1}: {len(barco)} esloras")
 
 
 def cordenadas(flota_rival):
-for i, barco in enumerate(flota_rival):
-    print(f"Barco {i + 1}: {len(barco)} esloras")
-    print(f"Tipo: {type(barco)}")
-    print(f"Contenido: {barco}")
+    for i, barco in enumerate(flota_rival):
+        print(f"Barco {i + 1}: {len(barco)} esloras")
+        print(f"Tipo: {type(barco)}")
+        print(f"Contenido: {barco}")
 
+def disparo(t_riv_bar,t_jug_dis):
 
+    try:
+        fila = int(input("Fila"))
+        columna = int(input("Columna"))
+        col = (fila,columna)
+        if t_riv_bar[fila][columna] =="🚢":
+            t_jug_dis[fila][columna] ="💥"
+            print(textos_acierto)
+        else:
+            t_jug_dis[fila][columna] ="💨"
+            print("agua")
+        
+    except:
+        if fila == "WIN":
+            print("win")
+        else:
+            print("Valor no valido")
+    return print(t_jug_dis)
 
+def disparo_maq1(t_jug_bar, t_riv_dis):
 
+    fila = np.random.randint(10)
+    columna = np.random.randint(10)
 
+    while t_riv_dis[fila, columna] != "🌊":
+        fila = np.random.randint(10)
+        columna = np.random.randint(10)
+
+    if  t_jug_bar[fila, columna] == "🚢":
+        t_riv_dis[fila, columna] = "💥"
+        t_jug_bar[fila, columna] = "💥"
+        print("Nos han dado!!!!!!!!!")
+    else:
+        t_riv_dis[fila, columna] = "💨"
+        t_jug_bar[fila, columna] = "💨"
+        print("Han fallado")
+        
+
+    return t_jug_bar
 
 
 
