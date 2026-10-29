@@ -75,25 +75,40 @@ def cordenadas(flota_rival):
         print(f"Tipo: {type(barco)}")
         print(f"Contenido: {barco}")
 
+
+def pintar(t_jug_bar, t_jug_dis):
+
+    print("🗺️ 🗺️ 🗺️ 🗺️ 🗺️ 🗺️ 🗺️ 🗺️ Tableros")
+    print()
+
+    print("⚓ ⚓ ⚓ ⚓ ⚓ ⚓ Esto son tus barcos ⚓ ⚓ ⚓ ⚓ ⚓ ⚓")
+    print(t_jug_bar)
+    print()
+
+  
+
+    print("🏹 🏹 🏹 🏹 🏹 🏹Este es tu panel de disparos 🏹 🏹 🏹 🏹 🏹 🏹 ")
+    print(t_jug_dis)
+    print()
+       
+
 def disparo(t_riv_bar,t_jug_dis):
 
     try:
         fila = int(input("Fila"))
         columna = int(input("Columna"))
-        col = (fila,columna)
         if t_riv_bar[fila][columna] =="🚢":
             t_jug_dis[fila][columna] ="💥"
-            print(textos_acierto)
+            print(v.textos_acierto)
         else:
             t_jug_dis[fila][columna] ="💨"
-            print("agua")
+            print(v.textos_Fallo)
         
     except:
-        if fila == "WIN":
-            print("win")
-        else:
-            print("Valor no valido")
-    return print(t_jug_dis)
+       
+        print("Valor no valido")
+    return 
+
 
 def disparo_maq1(t_jug_bar, t_riv_dis):
 
@@ -113,14 +128,34 @@ def disparo_maq1(t_jug_bar, t_riv_dis):
         t_jug_bar[fila, columna] = "💨"
         print("Han fallado")
         
-
-    return t_jug_bar
-
+    return 
 
 
+def crear_lista_impactos(flota):
+    impactos = []
+
+    for barco in flota:
+        impactos.append([])
+
+    return impactos
 
 
+def turnos(t_riv_bar, t_jug_dis, t_jug_bar, t_riv_dis):
 
+    turno_jugador = True
+
+    while True:
+        if turno_jugador:
+            print("Turno Jugador")
+            disparo(t_riv_bar, t_jug_dis)
+            turno_jugador = False
+            print(pintar(t_jug_bar, t_jug_dis))
+
+        else:
+            print("Turno Rival")
+            disparo_maq1(t_jug_bar, t_riv_dis)
+            turno_jugador = True
+            print(pintar(t_jug_bar, t_jug_dis))
 
 
 
