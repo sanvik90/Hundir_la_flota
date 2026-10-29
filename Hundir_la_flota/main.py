@@ -17,7 +17,7 @@ t_jug_bar = fc.colocar_flota(flota_jugador, t_jug_bar)
 t_riv_bar = fc.colocar_flota(flota_rival, t_riv_bar)
 
 print(v.texto_bienvienida)
-time.sleep(2)
+time.sleep(5)
 fc.pintar(t_jug_bar, t_jug_dis)
 fc.turnos(t_riv_bar, t_jug_dis, t_jug_bar, t_riv_dis)
 
