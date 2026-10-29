@@ -81,8 +81,6 @@ def pintar(t_jug_bar, t_jug_dis):
        
 
 def disparo(t_riv_bar, t_jug_dis, t_jug_bar):
-    
-    
     fila = int(input("Escoge la fila: "))
     if fila == 333:
         print("👁️ 👁️ 👁️ 👁️Superperiscopio activado 👁️ 👁️ 👁️ 👁️")
@@ -117,16 +115,14 @@ def disparo(t_riv_bar, t_jug_dis, t_jug_bar):
             print("¡¡¡¡¡ LO CONSEGUISTE GRUEMETE!!!!!\n has derrotado a la flota rival")
    
         
- 
-
     else:
         t_jug_dis[fila][columna] = "💨"
-        time.sleep(1.4)
+        time.sleep(2)
         print(v.textos_Fallo)
         print()
         time.sleep(0.5)
         print("🏹 🏹 🏹 🏹 🏹 🏹Este es tu panel de disparos 🏹 🏹 🏹 🏹 🏹 🏹 ")
-        time.sleep(0.5)
+        time.sleep(1.5)
         print(t_jug_dis)
         time.sleep(0.5)
         print(f"Has conseguido {np.count_nonzero(t_jug_dis == "💥")} impactos. Te quedan {16 -np.count_nonzero(t_jug_dis == "💥")} ")
@@ -147,14 +143,14 @@ def disparo_maq1(t_jug_bar, t_riv_dis, t_jug_dis):
     if t_jug_bar[fila, columna] == "🚢":
         t_riv_dis[fila, columna] = "💥"
         t_jug_bar[fila, columna] = "💥"
-        time.sleep(1.4)
+        time.sleep(1.7)
         print("Nos han dado")
         print()
-        time.sleep(0.5)
+        time.sleep(1.5)
         print("⚓ ⚓ ⚓ ⚓ ⚓ ⚓ Esto son tus barcos ⚓ ⚓ ⚓ ⚓ ⚓ ⚓")
         print(t_jug_bar)
         print()
-        time.sleep(3)
+        time.sleep(1)
         if np.count_nonzero(t_jug_bar == "💥") <= 16:
             return disparo_maq1(t_jug_bar, t_riv_dis, t_jug_dis)
         else:
@@ -163,10 +159,10 @@ def disparo_maq1(t_jug_bar, t_riv_dis, t_jug_dis):
     else:
         t_riv_dis[fila, columna] = "💨"
         t_jug_bar[fila, columna] = "💨"
-        time.sleep(1.4)
+        time.sleep(1.7)
         print("Han fallado")
         print()
-        time.sleep(0.5)
+        time.sleep(1.5)
         print("⚓ ⚓ ⚓ ⚓ ⚓ ⚓ Esto son tus barcos ⚓ ⚓ ⚓ ⚓ ⚓ ⚓")
         print(t_jug_bar)
         print()
