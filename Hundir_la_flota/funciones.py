@@ -1,7 +1,10 @@
 import numpy as np
 import variables as v 
+import time
 
-
+"""
+_____________Cosas de tableros
+"""
 
 def crear_tablero():
     tablero =np.full((10,10),"🌊")
@@ -65,40 +68,42 @@ def colocar_flota(flota,tablero):
 
 
 def pintar(t_jug_bar, t_jug_dis):
+    time.sleep(1)
 
-    print("🗺️  Tableros 🗺️ ")
+
+    print("🏹 🏹 🏹 🏹 🏹 🏹Este es tu panel de disparos 🏹 🏹 🏹 🏹 🏹 🏹 ")
+    print(t_jug_dis)
     print()
+    time.sleep(0.5)
 
     print("⚓ ⚓ ⚓ ⚓ ⚓ ⚓ Esto son tus barcos ⚓ ⚓ ⚓ ⚓ ⚓ ⚓")
     print(t_jug_bar)
     print()
 
-  
-
-    print("🏹 🏹 🏹 🏹 🏹 🏹Este es tu panel de disparos 🏹 🏹 🏹 🏹 🏹 🏹 ")
-    print(t_jug_dis)
-    print()
+    
        
 
-def disparo(t_riv_bar,t_jug_dis):
+def disparo(t_riv_bar, t_jug_dis, t_jug_bar):
 
-    try:
-        fila = int(input("Escoje la fila: "))
-        columna = int(input("Escoje la columna: "))
-        if t_riv_bar[fila][columna] =="🚢":
-            t_jug_dis[fila][columna] ="💥"
-            print(v.textos_acierto)
-        else:
-            t_jug_dis[fila][columna] ="💨"
-            print("fallo")
-        
-    except:
-       
-        print("Valor no valido")
-    return 
+    fila = int(input("Escoge la fila: "))
+    columna = int(input("Escoge la columna: "))
+
+    if t_riv_bar[fila][columna] == "🚢":
+        t_jug_dis[fila][columna] = "💥"
+        time.sleep(1.4)
+        print(v.textos_acierto)
+        pintar(t_jug_bar, t_jug_dis)
+        return disparo(t_riv_bar, t_jug_dis, t_jug_bar)
+
+    else:
+        t_jug_dis[fila][columna] = "💨"
+        time.sleep(1.4)
+        print(v.textos_Fallo)
+        pintar(t_jug_bar, t_jug_dis)
+        return False
 
 
-def disparo_maq1(t_jug_bar, t_riv_dis):
+def disparo_maq1(t_jug_bar, t_riv_dis, t_jug_dis):
 
     fila = np.random.randint(10)
     columna = np.random.randint(10)
@@ -107,16 +112,21 @@ def disparo_maq1(t_jug_bar, t_riv_dis):
         fila = np.random.randint(10)
         columna = np.random.randint(10)
 
-    if  t_jug_bar[fila, columna] == "🚢":
+    if t_jug_bar[fila, columna] == "🚢":
         t_riv_dis[fila, columna] = "💥"
         t_jug_bar[fila, columna] = "💥"
-        print("Nos han dado!!!!!!!!!")
+        time.sleep(1.4)
+        print("Nos han dado")
+        pintar(t_jug_bar, t_jug_dis)
+        return disparo_maq1(t_jug_bar, t_riv_dis, t_jug_dis)
+
     else:
         t_riv_dis[fila, columna] = "💨"
         t_jug_bar[fila, columna] = "💨"
+        time.sleep(1.4)
         print("Han fallado")
-        
-    return 
+        pintar(t_jug_bar, t_jug_dis)
+        return False
 
 
 def crear_lista_impactos(flota):
@@ -131,20 +141,29 @@ def crear_lista_impactos(flota):
 def turnos(t_riv_bar, t_jug_dis, t_jug_bar, t_riv_dis):
 
     turno_jugador = True
-    t=1
+
 
     while True:
         if turno_jugador:
-            print(f"Turno Jugador número: {t+13}")
-            disparo(t_riv_bar, t_jug_dis)
-            pintar(t_jug_bar, t_jug_dis)
+            print("Turno Jugador número")
+            disparo(t_riv_bar, t_jug_dis, t_jug_bar)
+        
             turno_jugador = False
+          
 
         else:
             print("Turno Rival")
-            disparo_maq1(t_jug_bar, t_riv_dis)
-            pintar(t_jug_bar, t_jug_dis)
+            time.sleep(2)
+            disparo_maq1(t_jug_bar, t_riv_dis, t_jug_dis)
             turno_jugador = True
+        if "🚢" not in t_riv_bar:
+            ganador = jugador
+            break
+            
+
+        if "🚢" not in t_jug_bar:
+            ganador = rival
+            break
 
 
 
