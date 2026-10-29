@@ -2,9 +2,6 @@ import numpy as np
 import variables as v 
 import time
 
-"""
-_____________Cosas de tableros
-"""
 
 def crear_tablero():
     tablero =np.full((10,10),"🌊")
@@ -84,29 +81,42 @@ def pintar(t_jug_bar, t_jug_dis):
        
 
 def disparo(t_riv_bar, t_jug_dis, t_jug_bar):
+    
+    
     fila = int(input("Escoge la fila: "))
     if fila == 333:
         print("👁️ 👁️ 👁️ 👁️Superperiscopio activado 👁️ 👁️ 👁️ 👁️")
         print(t_riv_bar)
         return disparo(t_riv_bar, t_jug_dis, t_jug_bar)
     elif fila >10 or fila < -1:
-        fila = int(input("Pero con un valor del 0 al 9, leñe "))
+        print("Pero con un valor del 0 al 9, leñe ")
+        return disparo(t_riv_bar, t_jug_dis, t_jug_bar)
 
-    columna = int(input("Escoge la columna"))
+    columna = int(input("Escoge la columna "))
     if columna >10 or columna < -1:
-            columna = int(input("Pero con un valor del 0 al 9, leñe "))
+            print("Pero con un valor del 0 al 9, leñe ")
+            return disparo(t_riv_bar, t_jug_dis, t_jug_bar)
     
     if t_riv_bar[fila][columna] == "🚢":
         t_jug_dis[fila][columna] = "💥"
         time.sleep(1.4)
         print(v.textos_acierto)
+        time.sleep(0.8)
         print()
         time.sleep(0.7)
         print("🏹 🏹 🏹 🏹 🏹 🏹Este es tu panel de disparos 🏹 🏹 🏹 🏹 🏹 🏹 ")
+        time.sleep(0.5)
         print(t_jug_dis)
         print()
+        time.sleep(0.5)
         print(f"Has conseguido {np.count_nonzero(t_jug_dis == "💥")} impactos. Te quedan {16 -np.count_nonzero(t_jug_dis == "💥")} ")
-        return disparo(t_riv_bar, t_jug_dis, t_jug_bar)
+        time.sleep(0.4)
+        if np.count_nonzero(t_riv_bar == "💥") <= 16:
+            disparo(t_riv_bar, t_jug_dis, t_jug_bar)
+        else:
+            print("¡¡¡¡¡ LO CONSEGUISTE GRUEMETE!!!!!\n has derrotado a la flota rival")
+   
+        
  
 
     else:
@@ -114,9 +124,11 @@ def disparo(t_riv_bar, t_jug_dis, t_jug_bar):
         time.sleep(1.4)
         print(v.textos_Fallo)
         print()
-        time.sleep(0.3)
+        time.sleep(0.5)
         print("🏹 🏹 🏹 🏹 🏹 🏹Este es tu panel de disparos 🏹 🏹 🏹 🏹 🏹 🏹 ")
+        time.sleep(0.5)
         print(t_jug_dis)
+        time.sleep(0.5)
         print(f"Has conseguido {np.count_nonzero(t_jug_dis == "💥")} impactos. Te quedan {16 -np.count_nonzero(t_jug_dis == "💥")} ")
         print()
       
@@ -143,7 +155,10 @@ def disparo_maq1(t_jug_bar, t_riv_dis, t_jug_dis):
         print(t_jug_bar)
         print()
         time.sleep(3)
-        return disparo_maq1(t_jug_bar, t_riv_dis, t_jug_dis)
+        if np.count_nonzero(t_jug_bar == "💥") <= 16:
+            return disparo_maq1(t_jug_bar, t_riv_dis, t_jug_dis)
+        else:
+            print("PERDISTE GRUMETE. TODA LA FLOTA ESTA PERDIDA ")
 
     else:
         t_riv_dis[fila, columna] = "💨"
@@ -162,25 +177,25 @@ def disparo_maq1(t_jug_bar, t_riv_dis, t_jug_dis):
 
 
 
+
 def turnos(t_riv_bar, t_jug_dis, t_jug_bar, t_riv_dis):
     turno_jugador = True
 
     while True:
-    
-        if np.count_nonzero(t_jug_dis == "💥") >= 16:
-            print("HAS GANADO")
+        if np.count_nonzero(t_jug_bar == "💥") >= 16:
+            print("PERDISTE GRUMETE. TODA LA FLOTA ESTA PERDIDA ")
             break
 
-   
-        if np.count_nonzero(t_riv_dis == "💥") >= 16:
-            print("HAS PERDIDO.")
+        if np.count_nonzero(t_riv_bar == "💥") >= 16:
             break
 
-     
         if turno_jugador:
             print("Turno Jugador")
             disparo(t_riv_bar, t_jug_dis, t_jug_bar)
-            turno_jugador = False
+            if np.count_nonzero(t_jug_dis == "💥") >= 16:
+              print("HAS GANADO")
+            break
+        turno_jugador = False
 
         else:
             print("Turno Rival")

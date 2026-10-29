@@ -1,6 +1,6 @@
 import  numpy as np
 
-texto_bienvienida = "Despierta, grumete. ¡Es la guerra! \n Nuestro cápitan está indispuesto, y nos estan atacando. \n Necesitamos que vengas urgentemetne al puente de mando.\n ¡ Rápido! "
+texto_bienvienida = "Despierta, grumete. ¡Es la guerra! \n Nuestro cápitan está indispuesto, y nos están atacando. \n Necesitamos que vengas urgentemetne al puente de mando.\n ¡ Rápido !¡No tenemos tiempo!  "
 fallo_1 = "¡Agua!"
 fallo_2 = "¡Fallaste!"
 fallo_3 = "Si disparar al agua fuese deporte olímpico, serías medalla de oro"
