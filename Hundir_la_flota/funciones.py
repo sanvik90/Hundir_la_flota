@@ -192,10 +192,7 @@ def turnos(t_riv_bar, t_jug_dis, t_jug_bar, t_riv_dis):
         if turno_jugador:
             print("Turno Jugador")
             disparo(t_riv_bar, t_jug_dis, t_jug_bar)
-            if np.count_nonzero(t_jug_dis == "💥") >= 16:
-              print("HAS GANADO")
-            break
-        turno_jugador = False
+            turno_jugador = False
 
         else:
             print("Turno Rival")
